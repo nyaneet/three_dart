@@ -11,6 +11,7 @@ import 'package:three_dart/three3d/math/vector4.dart';
 import 'package:three_dart/three3d/textures/index.dart';
 
 abstract class RenderTarget with EventDispatcher {
+  bool _didDispose = false;
   late int width;
   late int height;
   int depth = 1;
@@ -152,7 +153,20 @@ class WebGLRenderTarget extends RenderTarget {
 
   @override
   void dispose() {
+    if (_didDispose) return;
+    _didDispose = true;
     dispatchEvent(Event({"type": "dispose"}));
+    depthTexture?.dispose();
+    if (texture is List<Texture>) {
+      final textures = (texture as List<Texture>);
+      for (final texturesItem in textures) {
+        texturesItem.dispose();
+      }
+    } else if (texture is Texture) {
+      (texture as Texture).dispose();
+    }
+    depthTexture?.dispose();
+    options.dispose();
   }
 }
 
@@ -226,6 +240,11 @@ class WebGLRenderTargetOptions {
     }
 
     samples = json["samples"];
+  }
+
+  void dispose() {
+    depthTexture?.dispose();
+    depthTexture = null;
   }
 
   Map<String, dynamic> toJSON() {

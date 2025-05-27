@@ -1,3 +1,4 @@
+import 'package:flutter_gl/native-array/index.dart';
 import 'package:three_dart/three3d/extras/index.dart';
 import 'package:three_dart/three3d/math/index.dart';
 import 'package:three_dart/three3d/textures/image_element.dart';
@@ -12,6 +13,22 @@ class Source {
   Source([this.data]) {
     uuid = MathUtils.generateUUID();
     version = 0;
+  }
+
+  void dispose() {
+    if (data is List) {
+      for (final temp in data) {
+        if (temp is NativeArray) {
+          temp.dispose();
+        } else if (temp is ImageElement) {
+          temp.dispose();
+        }
+      }
+    } else if (data is ImageElement) {
+      (data as ImageElement).dispose();
+    } else if (data is NativeArray) {
+      (data as NativeArray).dispose();
+    }
   }
 
   set needsUpdate(value) {

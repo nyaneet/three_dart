@@ -12,6 +12,7 @@ import 'package:three_dart/three3d/textures/index.dart';
 import 'package:three_dart/three3d/weak_map.dart';
 
 class WebGLTextures {
+  bool _didDispose = false;
   dynamic gl;
   dynamic get _gl => gl;
   WebGLExtensions extensions;
@@ -288,58 +289,86 @@ class WebGLTextures {
   }
 
   void deallocateRenderTarget(RenderTarget renderTarget) {
-    var texture = renderTarget.texture;
-
-    var renderTargetProperties = properties.get(renderTarget);
-    var textureProperties = properties.get(texture);
-
-    if (textureProperties["__webglTexture"] != null) {
-      gl.deleteTexture(textureProperties["__webglTexture"]);
-      info.memory["textures"] = info.memory["textures"]! - 1;
-    }
+    final renderTargetProperties = properties.get(renderTarget);
 
     if (renderTarget.depthTexture != null) {
       renderTarget.depthTexture!.dispose();
+      properties.remove(renderTarget.depthTexture);
     }
 
     if (renderTarget.isWebGLCubeRenderTarget) {
-      for (var i = 0; i < 6; i++) {
+      for (int i = 0; i < 6; i++) {
         gl.deleteFramebuffer(renderTargetProperties["__webglFramebuffer"][i]);
+        if (renderTargetProperties['__webglFramebuffer'][i] is List) {
+          for (int level = 0;
+              level < renderTargetProperties['__webglFramebuffer'][i].length;
+              level++)
+            _gl.deleteFramebuffer(
+                renderTargetProperties['__webglFramebuffer'][i][level]);
+        } else {
+          _gl.deleteFramebuffer(
+              renderTargetProperties['__webglFramebuffer'][i]);
+        }
         if (renderTargetProperties["__webglDepthbuffer"] != null) {
-          gl.deleteRenderbuffer(renderTargetProperties["__webglDepthbuffer"][i]);
+          gl.deleteRenderbuffer(
+              renderTargetProperties["__webglDepthbuffer"][i]);
         }
       }
     } else {
+      if (renderTargetProperties['__webglFramebuffer'] is List) {
+        for (int level = 0;
+            level < renderTargetProperties['__webglFramebuffer'].length;
+            level++)
+          _gl.deleteFramebuffer(
+              renderTargetProperties['__webglFramebuffer'][level]);
+      } else {
+        _gl.deleteFramebuffer(renderTargetProperties['__webglFramebuffer']);
+      }
+
       gl.deleteFramebuffer(renderTargetProperties["__webglFramebuffer"]);
       if (renderTargetProperties["__webglDepthbuffer"] != null) {
         gl.deleteRenderbuffer(renderTargetProperties["__webglDepthbuffer"]);
       }
       if (renderTargetProperties["__webglMultisampledFramebuffer"] != null) {
-        gl.deleteFramebuffer(renderTargetProperties["__webglMultisampledFramebuffer"]);
+        gl.deleteFramebuffer(
+            renderTargetProperties["__webglMultisampledFramebuffer"]);
       }
       if (renderTargetProperties["__webglColorRenderbuffer"] != null) {
-        gl.deleteRenderbuffer(renderTargetProperties["__webglColorRenderbuffer"]);
+        if (renderTargetProperties['__webglColorRenderbuffer'] is List) {
+          for (int level = 0;
+              level < renderTargetProperties['__webglColorRenderbuffer'].length;
+              level++)
+            _gl.deleteRenderbuffer(
+                renderTargetProperties['__webglColorRenderbuffer'][level]);
+        } else {
+          _gl.deleteRenderbuffer(
+              renderTargetProperties['__webglColorRenderbuffer']);
+        }
       }
       if (renderTargetProperties["__webglDepthRenderbuffer"] != null) {
-        gl.deleteRenderbuffer(renderTargetProperties["__webglDepthRenderbuffer"]);
+        gl.deleteRenderbuffer(
+            renderTargetProperties["__webglDepthRenderbuffer"]);
       }
     }
 
-    if (renderTarget.isWebGLMultipleRenderTargets) {
-      for (var i = 0, il = texture.length; i < il; i++) {
-        var attachmentProperties = properties.get(texture[i]);
-
+    final textures = renderTarget.texture;
+    if (textures is List<Texture>) {
+      for (int i = 0, il = textures.length; i < il; i++) {
+        final attachmentProperties = properties.get(textures[i]);
         if (attachmentProperties["__webglTexture"] != null) {
           gl.deleteTexture(attachmentProperties["__webglTexture"]);
-
           info.memory["textures"] = info.memory["textures"]! - 1;
         }
-
-        properties.remove(texture[i]);
+        properties.remove(textures[i]);
       }
+    } else {
+      final attachmentProperties = properties.get(textures);
+      if (attachmentProperties["__webglTexture"] != null) {
+        gl.deleteTexture(attachmentProperties["__webglTexture"]);
+        info.memory["textures"] = info.memory["textures"]! - 1;
+      }
+      properties.remove(textures);
     }
-
-    properties.remove(texture);
     properties.remove(renderTarget);
   }
 
@@ -2039,5 +2068,18 @@ class WebGLTextures {
     return image;
   }
 
-  void dispose() {}
+  void dispose() {
+    if (_didDispose) return;
+    _didDispose = true;
+    extensions.dispose();
+    state.dispose();
+    properties.dispose();
+    capabilities.dispose();
+    utils.dispose();
+    info.dispose();
+    _videoTextures.clear();
+    _sources.clear();
+    wrappingToGL.clear();
+    filterToGL.clear();
+  }
 }

@@ -10,6 +10,10 @@ class UniformsCache {
 
   Map<int, Map<String, dynamic>> lights = {};
 
+  void dispose() {
+    lights.clear();
+  }
+
   Map<String, dynamic> get(light) {
     if (lights[light.id] != null) {
       return lights[light.id]!;
@@ -60,6 +64,10 @@ class UniformsCache {
 
 class ShadowUniformsCache {
   Map<int, Map<String, dynamic>> lights = {};
+
+  void dispose() {
+    lights.clear();
+  }
 
   get(light) {
     if (lights[light.id] != null) {
@@ -159,6 +167,13 @@ class WebGLLights {
     matrix42 = Matrix4();
   }
 
+  void dispose() {
+    state.dispose();
+    cache.dispose();
+    shadowCache.dispose();
+    extensions.dispose();
+  }
+
   void setup(List<Light> lights, [bool? physicallyCorrectLights]) {
     num r = 0.0;
     num g = 0.0;
@@ -240,7 +255,8 @@ class WebGLLights {
         uniforms["distance"] = distance;
 
         uniforms["coneCos"] = Math.cos(light.angle!);
-        uniforms["penumbraCos"] = Math.cos(light.angle! * (1 - light.penumbra!));
+        uniforms["penumbraCos"] =
+            Math.cos(light.angle! * (1 - light.penumbra!));
         uniforms["decay"] = light.decay;
 
         if (light.castShadow) {
@@ -515,5 +531,25 @@ class LightState {
     pointShadowMap = json["pointShadowMap"];
     pointShadowMatrix = json["pointShadowMatrix"];
     hemi = json["hemi"];
+  }
+
+  void dispose() {
+    hash.clear();
+    ambient.clear();
+    probe.clear();
+    directional.clear();
+    directionalShadow.clear();
+    directionalShadowMap.clear();
+    directionalShadowMatrix.clear();
+    spot.clear();
+    spotShadow.clear();
+    spotShadowMap.clear();
+    spotShadowMatrix.clear();
+    rectArea.clear();
+    point.clear();
+    pointShadow.clear();
+    pointShadowMap.clear();
+    pointShadowMatrix.clear();
+    hemi.clear();
   }
 }

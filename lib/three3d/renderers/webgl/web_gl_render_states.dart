@@ -4,6 +4,7 @@ import 'package:three_dart/three3d/renderers/webgl/index.dart';
 import 'package:three_dart/three3d/weak_map.dart';
 
 class WebGLRenderState {
+  bool _didDispose = false;
   late WebGLLights lights;
   WebGLExtensions extensions;
   WebGLCapabilities capabilities;
@@ -12,6 +13,16 @@ class WebGLRenderState {
 
   WebGLRenderState(this.extensions, this.capabilities) {
     lights = WebGLLights(extensions, capabilities);
+  }
+
+  void dispose() {
+    if (_didDispose) return;
+    _didDispose = true;
+    lightsArray.clear();
+    shadowsArray.clear();
+    lights.dispose();
+    lights.dispose();
+    extensions.dispose();
   }
 
   RenderState get state {

@@ -27,6 +27,10 @@ class InterleavedBuffer {
     uuid = MathUtils.generateUUID();
   }
 
+  void dispose() {
+    array.dispose();
+  }
+
   set needsUpdate(bool value) {
     if (value == true) {
       version++;

@@ -4,6 +4,7 @@ import 'package:three_dart/three3d/renderers/webgl/web_gl_extensions.dart';
 import 'package:three_dart/three3d/renderers/webgl/web_gl_info.dart';
 
 class WebGLIndexedBufferRenderer extends BaseWebGLBufferRenderer {
+  bool _didDispose = false;
   bool isWebGL2 = false;
   var mode;
   var type;
@@ -15,6 +16,14 @@ class WebGLIndexedBufferRenderer extends BaseWebGLBufferRenderer {
 
   WebGLIndexedBufferRenderer(this.gl, this.extensions, this.info, this.capabilities) {
     isWebGL2 = capabilities.isWebGL2;
+  }
+
+  void dispose() {
+    if (_didDispose) return;
+    _didDispose = true;
+    extensions.dispose();
+    info.dispose();
+    capabilities.dispose();
   }
 
   @override

@@ -197,6 +197,8 @@ class Texture with EventDispatcher {
     } else {
       image?.dispose();
     }
+    source.dispose();
+    matrix.dispose();
   }
 
   transformUv(uv) {

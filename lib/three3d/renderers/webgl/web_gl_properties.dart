@@ -26,5 +26,7 @@ class WebGLProperties {
     m[key] = value;
   }
 
-  dispose() {}
+  dispose() {
+    properties.clear();
+  }
 }

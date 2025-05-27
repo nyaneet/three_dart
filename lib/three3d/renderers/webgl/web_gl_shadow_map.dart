@@ -11,6 +11,7 @@ import 'package:three_dart/three3d/renderers/shaders/index.dart';
 import 'package:three_dart/three3d/renderers/webgl/index.dart';
 
 class WebGLShadowMap {
+  bool _didDispose = false;
   Frustum _frustum = Frustum(null, null, null, null, null, null);
   final _shadowMapSize = Vector2(null, null);
   final _viewportSize = Vector2(null, null);
@@ -74,6 +75,27 @@ class WebGLShadowMap {
     shadowMaterialHorizontal.defines!["HORIZONTAL_PASS"] = 1;
 
     scope = this;
+  }
+
+  void dispose() {
+    if (_didDispose) return;
+    _didDispose = true;
+    fullScreenMesh.dispose();
+    fullScreenTri.dispose();
+
+    _depthMaterial.dispose();
+    _distanceMaterial.dispose();
+
+    shadowMaterialVertical.dispose();
+    shadowMaterialHorizontal.dispose();
+
+    _frustum.dispose();
+    shadowSide.clear();
+
+    scope.dispose();
+    _renderer.dispose();
+    _objects.dispose();
+    _capabilities.dispose();
   }
 
   void render(List<Light> lights, Object3D scene, Camera camera) {
