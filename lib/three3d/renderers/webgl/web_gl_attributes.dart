@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:flutter_gl/native-array/index.dart';
 import 'package:three_dart/three3d/core/index.dart';
 import 'package:three_dart/three3d/renderers/webgl/index.dart';
 import 'package:three_dart/three3d/weak_map.dart';
@@ -103,17 +104,32 @@ class WebGLAttributes {
     }
   }
 
-  remove(BufferAttribute attribute) {
-    if (attribute.type == "InterleavedBufferAttribute") {
-      var data = buffers.get(attribute.data);
+  void dispose(){
+    final len = buffers.keys.toList();
+    for(int i = 0; i < len.length;i++){
+      if(len[i] is BufferAttribute){
+        (len[i] as BufferAttribute).dispose();
+        remove(len[i]);
+      }
+      else if(len[i] is NativeArray){
+        (len[i] as NativeArray).dispose();
+        remove(len[i]);
+      }
+    }
+    buffers.clear();
+  }
 
-      if (data) {
+  void remove(BufferAttribute attribute) {
+    if (attribute.type == "InterleavedBufferAttribute") {
+      final data = buffers.get(attribute.data);
+
+      if (data != null) {
         gl.deleteBuffer(data.buffer);
 
         buffers.delete(attribute.data);
       }
     } else {
-      var data = buffers.get(attribute);
+      final data = buffers.get(attribute);
 
       if (data != null) {
         gl.deleteBuffer(data["buffer"]);

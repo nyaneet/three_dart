@@ -1,6 +1,7 @@
 import 'package:three_dart/three3d/renderers/webgl/web_gl_extensions.dart';
 
 class WebGLCapabilities {
+  bool _didDispose = false;
   bool isWebGL2 = true;
 
   Map<String, dynamic> parameters;
@@ -74,5 +75,12 @@ class WebGLCapabilities {
 
   String getMaxPrecision(precision) {
     return 'highp';
+  }
+
+  void dispose() {
+    if (_didDispose) return;
+    _didDispose = true;
+    parameters.clear();
+    extensions.dispose();
   }
 }

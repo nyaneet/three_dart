@@ -13,6 +13,12 @@ class RenderItem {
   double z = 0;
   Map<String, dynamic>? group;
 
+  void dispose() {
+    material?.dispose();
+    object?.dispose();
+    geometry?.dispose();
+  }
+
   RenderItem(Map<String, dynamic> json) {
     if (json["id"] != null) {
       id = json["id"];
@@ -47,6 +53,21 @@ class RenderItem {
 
 class WebGLRenderList {
   WebGLRenderList();
+
+  void dispose() {
+    for (final key in renderItems.keys) {
+      renderItems[key]?.dispose();
+    }
+    for (final o in opaque) {
+      o.dispose();
+    }
+    for (final t in transmissive) {
+      t.dispose();
+    }
+    for (final t in transparent) {
+      t.dispose();
+    }
+  }
 
   Map<int, RenderItem> renderItems = {};
   int renderItemsIndex = 0;

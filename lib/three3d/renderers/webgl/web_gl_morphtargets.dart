@@ -36,6 +36,7 @@ denormalize(morph, BufferAttribute attribute) {
 }
 
 class WebGLMorphtargets {
+  bool _didDispose = false;
   var influencesList = {};
   var morphInfluences = Float32List(8);
   var morphTextures = WeakMap();
@@ -53,7 +54,18 @@ class WebGLMorphtargets {
     }
   }
 
-  void update(Object3D object, BufferGeometry geometry, Material material, WebGLProgram program) {
+  void dispose() {
+    if (_didDispose) return;
+    _didDispose = true;
+    influencesList.clear();
+    morphTextures.dispose();
+    workInfluences.clear();
+    capabilities.dispose();
+    textures.dispose();
+  }
+
+  void update(Object3D object, BufferGeometry geometry, Material material,
+      WebGLProgram program) {
     List<num>? objectInfluences = object.morphTargetInfluences;
 
     if (capabilities.isWebGL2 == true) {

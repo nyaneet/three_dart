@@ -6,10 +6,17 @@ import 'package:three_dart/three3d/renderers/webgl/web_gl_properties.dart';
 import 'package:three_dart/three3d/textures/index.dart';
 
 class WebGLMaterials {
+  bool _didDispose = false;
   WebGLRenderer renderer;
   WebGLProperties properties;
 
   WebGLMaterials(this.renderer, this.properties);
+
+  void dispose() {
+    if (_didDispose) return;
+    _didDispose = true;
+    properties.dispose();
+  }
 
   refreshFogUniforms(uniforms, fog) {
     uniforms["fogColor"]["value"].copy(fog.color);

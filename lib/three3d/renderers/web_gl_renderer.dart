@@ -13,6 +13,7 @@ import 'package:three_dart/three3d/textures/index.dart';
 import 'package:three_dart/extra/console.dart';
 
 class WebGLRenderer {
+  bool _didDispose = false;
   late Map<String, dynamic> parameters;
 
   late var domElement;
@@ -406,19 +407,52 @@ class WebGLRenderer {
   //
 
   void dispose() {
+    if (_didDispose) return;
+    _didDispose = true;
+    state.reset();
+    attributes.dispose();
     renderLists.dispose();
     renderStates.dispose();
-    properties.dispose();
     cubemaps.dispose();
     cubeuvmaps.dispose();
-    objects.dispose();
     bindingStates.dispose();
     programCache.dispose();
 
-    if (_transmissionRenderTarget != null) {
-      _transmissionRenderTarget!.dispose();
-      _transmissionRenderTarget = null;
+    _transmissionRenderTarget?.dispose();
+    _transmissionRenderTarget = null;
+
+    currentRenderList?.dispose();
+    for (final stack in renderListStack) {
+      stack.dispose();
     }
+    renderListStack.clear();
+    for (final stack in renderStateStack) {
+      stack.dispose();
+    }
+
+    renderStateStack.clear();
+    debug.clear();
+
+    _currentCamera?.clear();
+    _frustum.dispose();
+    _emptyScene.dispose();
+
+    extensions.dispose();
+    capabilities.dispose();
+    clipping.dispose();
+    utils.dispose();
+
+    state.dispose();
+    materials.dispose();
+    objects.dispose();
+    morphtargets.dispose();
+    indexedBufferRenderer.dispose();
+    background.dispose();
+    textures.dispose();
+    geometries.dispose();
+    shadowMap.dispose();
+
+    properties.dispose();
   }
 
   // Events

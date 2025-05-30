@@ -12,6 +12,7 @@ import 'package:three_dart/three3d/scenes/index.dart';
 import 'package:three_dart/three3d/textures/index.dart';
 
 class WebGLBackground {
+  bool _didDispose = false;
   WebGLCubeMaps cubemaps;
   WebGLState state;
 
@@ -32,6 +33,21 @@ class WebGLBackground {
 
   WebGLBackground(this.renderer, this.cubemaps, this.state, this.objects, this.alpha, this.premultipliedAlpha) {
     clearAlpha = alpha == true ? 0.0 : 1.0;
+  }
+
+  void dispose() {
+    if (_didDispose) return;
+    _didDispose = true;
+    cubemaps.dispose();
+    state.dispose();
+    renderer.dispose();
+    planeMesh?.dispose();
+    boxMesh?.dispose();
+    objects.dispose();
+
+    if (currentBackground is Texture) {
+      currentBackground.dispose();
+    }
   }
 
   void render(WebGLRenderList renderList, Object3D scene) {

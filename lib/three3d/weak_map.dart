@@ -98,4 +98,9 @@ class WeakMap<K, V> {
     _expando = Expando();
     _keys.clear();
   }
+
+  void dispose() {
+    _map.clear();
+    _keys.clear();
+  }
 }

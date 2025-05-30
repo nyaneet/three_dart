@@ -1,4 +1,5 @@
 class WebGLInfo {
+  bool _didDispose = false;
   dynamic gl;
 
   Map<String, int> memory = {"geometries": 0, "textures": 0};
@@ -9,6 +10,13 @@ class WebGLInfo {
   bool autoReset = true;
 
   WebGLInfo(this.gl);
+
+  void dispose() {
+    if (_didDispose) return;
+    _didDispose = true;
+    memory.clear();
+    render.clear();
+  }
 
   update(count, mode, instanceCount) {
     render["calls"] = render["calls"]! + 1;

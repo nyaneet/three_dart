@@ -4,6 +4,7 @@ import 'package:three_dart/three3d/math/index.dart';
 import 'package:three_dart/three3d/renderers/webgl/web_gl_properties.dart';
 
 class WebGLClipping {
+  bool _didDispose = false;
   WebGLProperties properties;
 
   Matrix3 viewNormalMatrix = Matrix3();
@@ -21,6 +22,14 @@ class WebGLClipping {
   num numIntersection = 0;
 
   WebGLClipping(this.properties);
+
+  void dispose() {
+    if (_didDispose) return;
+    _didDispose = true;
+    viewNormalMatrix.dispose();
+    properties.dispose();
+    uniform.clear();
+  }
 
   init(List<Plane> planes, bool enableLocalClipping, Camera camera) {
     var enabled = planes.isNotEmpty ||

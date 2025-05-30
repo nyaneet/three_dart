@@ -7,6 +7,7 @@ import 'package:three_dart/three3d/renderers/webgl/index.dart';
 import 'package:three_dart/three3d/weak_map.dart';
 
 class WebGLState {
+  bool _didDispose = false;
   bool isWebGL2 = true;
   dynamic gl;
   WebGLExtensions extensions;
@@ -146,6 +147,8 @@ class WebGLState {
     for (var i = 0; i < count; i++) {
       gl.texImage2D(target + i, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, data);
     }
+
+    data.dispose();
 
     return texture;
   }
@@ -680,7 +683,7 @@ class WebGLState {
     gl.blendFuncSeparate(gl.ONE, gl.ZERO, gl.ONE, gl.ZERO);
 
     gl.colorMask(true, true, true, true);
-    gl.clearColor(0, 0, 0, 0);
+    gl.clearColor(0.0, 0.0, 0.0, 0.0);
 
     gl.depthMask(true);
     gl.depthFunc(gl.LESS);
@@ -694,7 +697,7 @@ class WebGLState {
     gl.cullFace(gl.BACK);
     gl.frontFace(gl.CCW);
 
-    gl.polygonOffset(0, 0);
+    gl.polygonOffset(0.0, 0.0);
 
     gl.activeTexture(gl.TEXTURE0);
 
@@ -705,7 +708,7 @@ class WebGLState {
       gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     }
 
-    gl.useProgram(null);
+    gl.useProgram(0);
 
     gl.lineWidth(1);
 
@@ -751,6 +754,23 @@ class WebGLState {
     depthBuffer.reset();
     stencilBuffer.reset();
   }
+
+  void dispose() {
+    if (_didDispose) return;
+    _didDispose = true;
+
+    emptyTextures.clear();
+    equationToGL.clear();
+    factorToGL.clear();
+    buffers.clear();
+    enabledCapabilities.clear();
+    currentBoundFramebuffers.clear();
+    defaultDrawbuffers.clear();
+    currentBoundTextures.clear();
+
+    extensions.dispose();
+    currentDrawbuffers.dispose();
+  }
 }
 
 class ColorBuffer {
@@ -795,9 +815,8 @@ class ColorBuffer {
 
   reset() {
     locked = false;
-
     currentColorMask = null;
-    currentColorClear.set(-1, 0, 0, 0); // set to invalid state
+    currentColorClear.set(-1.0, 0.0, 0.0, 0.0); // set to invalid state
   }
 }
 

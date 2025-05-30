@@ -3,7 +3,6 @@ import 'package:three_dart/three3d/math/index.dart';
 
 class Camera extends Object3D {
   Matrix4 matrixWorldInverse = Matrix4();
-
   Matrix4 projectionMatrix = Matrix4();
   Matrix4 projectionMatrixInverse = Matrix4();
 
@@ -78,5 +77,13 @@ class Camera extends Object3D {
   @override
   Camera clone([bool? recursive = true]) {
     return Camera()..copy(this);
+  }
+
+  @override
+  void dispose() {
+    matrixWorldInverse.dispose();
+    projectionMatrix.dispose();
+    projectionMatrixInverse.dispose();
+    super.dispose();
   }
 }

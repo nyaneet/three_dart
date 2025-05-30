@@ -6,6 +6,10 @@ class WebGLExtensions {
 
   WebGLExtensions(this.gl);
 
+  void dispose() {
+    extensions.clear();
+  }
+
   getExtension(name) {
     return has(name);
   }

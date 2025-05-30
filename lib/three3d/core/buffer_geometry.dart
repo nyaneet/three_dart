@@ -947,8 +947,6 @@ class BufferGeometry with EventDispatcher {
   }
 
   void dispose() {
-    print(" BufferGeometry dispose ........... ");
-
     dispatchEvent(Event({"type": "dispose"}));
 
     if (attributes["color"] is BufferAttribute) {

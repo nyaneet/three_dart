@@ -141,4 +141,9 @@ class Frustum {
 
     return true;
   }
+
+  void dispose() {
+    // TODO: check native array disposing
+    planes.clear();
+  }
 }

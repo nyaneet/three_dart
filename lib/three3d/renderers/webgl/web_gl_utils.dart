@@ -3,6 +3,7 @@ import 'package:three_dart/three3d/renderers/webgl/index.dart';
 import 'package:three_dart/extra/console.dart';
 
 class WebGLUtils {
+  bool _didDispose = false;
   bool isWebGL2 = true;
   dynamic gl;
   WebGLExtensions extensions;
@@ -10,6 +11,12 @@ class WebGLUtils {
 
   WebGLUtils(this.gl, this.extensions, this.capabilities) {
     isWebGL2 = capabilities.isWebGL2;
+  }
+
+  void dispose() {
+    if (_didDispose) return;
+    _didDispose = true;
+    extensions.dispose();
   }
 
   convert(p, [encoding]) {
@@ -163,7 +170,9 @@ class WebGLUtils {
 
       if (extension != null) {
         if (p == RGB_ETC2_Format) {
-          return (encoding == sRGBEncoding) ? extension.COMPRESSED_SRGB8_ETC2 : extension.COMPRESSED_RGB8_ETC2;
+          return (encoding == sRGBEncoding)
+              ? extension.COMPRESSED_SRGB8_ETC2
+              : extension.COMPRESSED_RGB8_ETC2;
         }
         if (p == RGBA_ETC2_EAC_Format) {
           return (encoding == sRGBEncoding)
