@@ -5,9 +5,7 @@ Dart 3D library. an easy to use, lightweight, cross-platform, general purpose 3D
 three.js rewrite by Dart. 3D for Flutter. Base on [flutter_gl](https://github.com/wasabia/flutter_gl)
 
 
-support Web, iOS, Android, macOS, Windows
-
-Linux TODO, need flutter_gl support
+support Web, iOS, Android, macOS, Windows, Linux
 
 three.js r138
 
@@ -17,7 +15,7 @@ Example Demo on flutter web [https://wasabia.github.io/three_dart_example/#/](ht
 
 ## Getting Started
 
-First at all. Follow flutter_gl Usage [flutter_gl](https://github.com/wasabia/flutter_gl)
+First at all. Follow flutter_gl Usage [flutter_gl](https://github.com/nyaneet/flutter_gl)
 
 
 TODO
@@ -69,7 +67,7 @@ Pull request please!
 
 ## Libraries and Plugins
 
-[https://github.com/wasabia/three_dart_jsm](https://github.com/wasabia/three_dart_jsm)
+[https://github.com/nyaneet/three_dart_jsm](https://github.com/wasabia/three_dart_jsm)
 
 [https://github.com/wasabia/opentype](https://github.com/wasabia/opentype)
 
