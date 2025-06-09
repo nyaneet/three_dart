@@ -5,6 +5,7 @@ import 'package:three_dart/three3d/objects/index.dart';
 import 'package:three_dart/three3d/renderers/webgl/index.dart';
 
 class WebGLBindingStates {
+  bool _didDispose = false;
   dynamic gl;
   WebGLExtensions extensions;
   WebGLAttributes attributes;
@@ -429,31 +430,27 @@ class WebGLBindingStates {
   }
 
   void dispose() {
+    if(_didDispose) return;
+    _didDispose = true;
     reset();
 
-    // for ( var geometryId in bindingStates ) {
-
-    // 	var programMap = bindingStates[ geometryId ];
-
-    // 	for ( var programId in programMap ) {
-
-    // 		var stateMap = programMap[ programId ];
-
-    // 		for ( var wireframe in stateMap ) {
-
-    // 			deleteVertexArrayObject( stateMap[ wireframe ].object );
-
-    // 			delete stateMap[ wireframe ];
-
-    // 		}
-
-    // 		delete programMap[ programId ];
-
-    // 	}
-
-    // 	delete bindingStates[ geometryId ];
-
-    // }
+    for ( final geometryId in bindingStates.keys ) {
+      final programMap = bindingStates[ geometryId ];
+      for ( final programId in programMap.keys ) {
+        final stateMap = programMap[ programId ];
+        for ( final wireframe in stateMap.keys) {
+          deleteVertexArrayObject( stateMap[ wireframe ]['object'] );
+        }
+        stateMap.clear();
+      }
+      programMap.clear();
+    }
+    
+    bindingStates.clear();
+    attributes.dispose();
+    defaultState.clear();
+    currentState.clear();
+    attributes.dispose();
   }
 
   void releaseStatesOfGeometry(BufferGeometry geometry) {
@@ -473,27 +470,16 @@ class WebGLBindingStates {
   }
 
   void releaseStatesOfProgram(program) {
-    print(" WebGLBindingStates releaseStatesOfProgram ");
-
-    // for ( var geometryId in bindingStates ) {
-
-    // 	var programMap = bindingStates[ geometryId ];
-
-    // 	if ( programMap[ program.id ] == null ) continue;
-
-    // 	var stateMap = programMap[ program.id ];
-
-    // 	for ( var wireframe in stateMap ) {
-
-    // 		deleteVertexArrayObject( stateMap[ wireframe ].object );
-
-    // 		delete stateMap[ wireframe ];
-
-    // 	}
-
-    // 	delete programMap[ program.id ];
-
-    // }
+    for (final geometryId in bindingStates.keys ) {
+    	final programMap = bindingStates[ geometryId ];
+    	if ( programMap[ program.id ] == null ) continue;
+    	final stateMap = programMap[ program.id ];
+    	for ( final wireframe in stateMap.keys ) {
+    		deleteVertexArrayObject( stateMap[ wireframe ]['object'] );
+    	}
+      (stateMap as Map).clear();
+    	(programMap as Map).remove(program.id);
+    }
   }
 
   void reset() {
