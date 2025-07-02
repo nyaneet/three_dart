@@ -253,7 +253,7 @@ class Material with EventDispatcher {
       var newValue = values[key];
 
       if (newValue == null) {
-        print('three.Material setValues: $key parameter is null.');
+        // print('three.Material setValues: $key parameter is null.');
         continue;
       }
 
@@ -363,7 +363,7 @@ class Material with EventDispatcher {
     } else if (key == "reflectivity") {
       reflectivity = newValue;
     } else if (key == "roughness") {
-      print(" set values roughness: $newValue ");
+      // print(" set values roughness: $newValue ");
       roughness = newValue;
     } else if (key == "roughnessMap") {
       roughnessMap = newValue;
@@ -409,7 +409,7 @@ class Material with EventDispatcher {
     } else if (key == "visible") {
       visible = newValue;
     } else if (key == "vertexColors") {
-      print("set vertexColors: $newValue ");
+      // print("set vertexColors: $newValue ");
       vertexColors = newValue;
     } else if (key == "wireframe") {
       wireframe = newValue;
