@@ -17,7 +17,7 @@ dependencies:
   flutter_gl:
     git:
       url: https://github.com/nyaneet/flutter_gl.git
-      ref: 0.0.3
+      ref: 0.0.4
       path: flutter_gl
   meta:
 
