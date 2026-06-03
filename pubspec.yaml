@@ -1,6 +1,6 @@
 name: three_dart
 description: three.js implement by Dart. Dart 3D library. an easy to use, lightweight, cross-platform, general purpose 3D library.
-version: 0.0.4
+version: 0.0.5
 publish_to: none
 
 environment:
@@ -17,7 +17,7 @@ dependencies:
   flutter_gl:
     git:
       url: https://github.com/nyaneet/flutter_gl.git
-      ref: 0.0.4
+      ref: 0.0.5
       path: flutter_gl
   meta:
 
