@@ -16,15 +16,15 @@ dependencies:
   three_dart:
     git:
       url: https://github.com/nyaneet/three_dart.git
-      ref: 0.0.4
+      ref: 0.0.5
   three_dart_jsm:
     git:
       url: https://github.com/nyaneet/three_dart_jsm.git
-      ref: 0.0.4
+      ref: 0.0.5
   flutter_gl:
     git:
       url: https://github.com/nyaneet/flutter_gl.git
-      ref: 0.0.4
+      ref: 0.0.5
       path: flutter_gl
 
 dev_dependencies:

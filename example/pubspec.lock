@@ -5,10 +5,10 @@ packages:
     dependency: transitive
     description:
       name: archive
-      sha256: cb6a278ef2dbb298455e1a713bda08524a175630ec643a242c399c932a0a1f7d
+      sha256: a96e8b390886ee8abb49b7bd3ac8df6f451c621619f52a26e815fdcf568959ff
       url: "https://pub.dev"
     source: hosted
-    version: "3.6.1"
+    version: "4.0.9"
   async:
     dependency: transitive
     description:
@@ -29,10 +29,10 @@ packages:
     dependency: transitive
     description:
       name: characters
-      sha256: f71061c654a3380576a52b451dd5532377954cf9dbd272a78fc8479606670803
+      sha256: faf38497bda5ead2a8c7615f4f7939df04333478bf32e4173fcb06d428b5716b
       url: "https://pub.dev"
     source: hosted
-    version: "1.4.0"
+    version: "1.4.1"
   charcode:
     dependency: transitive
     description:
@@ -106,53 +106,53 @@ packages:
     dependency: "direct main"
     description:
       path: flutter_gl
-      ref: "0.0.3"
-      resolved-ref: "7e0a989f2eb71c375d5ba2182739bb667be21fc5"
+      ref: "0.0.5"
+      resolved-ref: a3cdb6b6f77256336b8065383759b6d2f4575cf1
       url: "https://github.com/nyaneet/flutter_gl.git"
     source: git
-    version: "0.0.1"
+    version: "0.0.5"
   flutter_gl_linux:
     dependency: transitive
     description:
       path: flutter_gl_linux
-      ref: "7e0a989f2eb71c375d5ba2182739bb667be21fc5"
-      resolved-ref: "7e0a989f2eb71c375d5ba2182739bb667be21fc5"
+      ref: a3cdb6b6f77256336b8065383759b6d2f4575cf1
+      resolved-ref: a3cdb6b6f77256336b8065383759b6d2f4575cf1
       url: "https://github.com/nyaneet/flutter_gl.git"
     source: git
-    version: "0.0.3"
+    version: "0.0.5"
   flutter_gl_macos:
     dependency: transitive
     description:
       path: flutter_gl_macos
-      ref: "7e0a989f2eb71c375d5ba2182739bb667be21fc5"
-      resolved-ref: "7e0a989f2eb71c375d5ba2182739bb667be21fc5"
+      ref: a3cdb6b6f77256336b8065383759b6d2f4575cf1
+      resolved-ref: a3cdb6b6f77256336b8065383759b6d2f4575cf1
       url: "https://github.com/nyaneet/flutter_gl.git"
     source: git
-    version: "0.0.1"
+    version: "0.0.5"
   flutter_gl_platform_interface:
     dependency: transitive
     description:
       path: flutter_gl_platform_interface
-      ref: "7e0a989f2eb71c375d5ba2182739bb667be21fc5"
-      resolved-ref: "7e0a989f2eb71c375d5ba2182739bb667be21fc5"
+      ref: a3cdb6b6f77256336b8065383759b6d2f4575cf1
+      resolved-ref: a3cdb6b6f77256336b8065383759b6d2f4575cf1
       url: "https://github.com/nyaneet/flutter_gl.git"
     source: git
-    version: "0.0.4"
+    version: "0.0.5"
   flutter_gl_web:
     dependency: transitive
     description:
       path: flutter_gl_web
-      ref: "7e0a989f2eb71c375d5ba2182739bb667be21fc5"
-      resolved-ref: "7e0a989f2eb71c375d5ba2182739bb667be21fc5"
+      ref: a3cdb6b6f77256336b8065383759b6d2f4575cf1
+      resolved-ref: a3cdb6b6f77256336b8065383759b6d2f4575cf1
       url: "https://github.com/nyaneet/flutter_gl.git"
     source: git
-    version: "0.0.1"
+    version: "0.0.5"
   flutter_gl_windows:
     dependency: transitive
     description:
       path: flutter_gl_windows
-      ref: "7e0a989f2eb71c375d5ba2182739bb667be21fc5"
-      resolved-ref: "7e0a989f2eb71c375d5ba2182739bb667be21fc5"
+      ref: a3cdb6b6f77256336b8065383759b6d2f4575cf1
+      resolved-ref: a3cdb6b6f77256336b8065383759b6d2f4575cf1
       url: "https://github.com/nyaneet/flutter_gl.git"
     source: git
     version: "0.0.1"
@@ -186,10 +186,10 @@ packages:
     dependency: transitive
     description:
       name: http
-      sha256: "5895291c13fa8a3bd82e76d5627f69e0d85ca6a30dcac95c4ea19a5d555879c2"
+      sha256: "87721a4a50b19c7f1d49001e51409bddc46303966ce89a65af4f4e6004896412"
       url: "https://pub.dev"
     source: hosted
-    version: "0.13.6"
+    version: "1.6.0"
   http_parser:
     dependency: transitive
     description:
@@ -202,10 +202,10 @@ packages:
     dependency: transitive
     description:
       name: image
-      sha256: "8e9d133755c3e84c73288363e6343157c383a0c6c56fc51afcc5d4d7180306d6"
+      sha256: "6300175e00616bbc832e2fc91bfa4d776af5402c81c7151bee6905bb08473c52"
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.0"
+    version: "4.9.1"
   leak_tracker:
     dependency: transitive
     description:
@@ -242,18 +242,18 @@ packages:
     dependency: transitive
     description:
       name: matcher
-      sha256: dc58c723c3c24bf8d3e2d3ad3f2f9d7bd9cf43ec6feaa64181775e60190153f2
+      sha256: dc0b7dc7651697ea4ff3e69ef44b0407ea32c487a39fff6a4004fa585e901861
       url: "https://pub.dev"
     source: hosted
-    version: "0.12.17"
+    version: "0.12.19"
   material_color_utilities:
     dependency: transitive
     description:
       name: material_color_utilities
-      sha256: f7142bb1154231d7ea5f96bc7bde4bda2a0945d2806bb11670e30b850d56bdec
+      sha256: "9c337007e82b1889149c82ed242ed1cb24a66044e30979c44912381e9be4c48b"
       url: "https://pub.dev"
     source: hosted
-    version: "0.11.1"
+    version: "0.13.0"
   meta:
     dependency: transitive
     description:
@@ -282,10 +282,10 @@ packages:
     dependency: transitive
     description:
       name: petitparser
-      sha256: "07c8f0b1913bcde1ff0d26e57ace2f3012ccbf2b204e070290dad3bb22797646"
+      sha256: "91bd59303e9f769f108f8df05e371341b15d59e995e6806aefab827b58336675"
       url: "https://pub.dev"
     source: hosted
-    version: "6.1.0"
+    version: "7.0.2"
   plugin_platform_interface:
     dependency: transitive
     description:
@@ -294,6 +294,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.8"
+  posix:
+    dependency: transitive
+    description:
+      name: posix
+      sha256: "185ef7606574f789b40f289c233efa52e96dead518aed988e040a10737febb07"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.5.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -343,28 +351,28 @@ packages:
     dependency: transitive
     description:
       name: test_api
-      sha256: ab2726c1a94d3176a45960b6234466ec367179b87dd74f1611adb1f3b5fb9d55
+      sha256: "8161c84903fd860b26bfdefb7963b3f0b68fee7adea0f59ef805ecca346f0c7a"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.7"
+    version: "0.7.10"
   three_dart:
     dependency: "direct main"
     description:
       path: "."
-      ref: "0.0.3"
-      resolved-ref: "5a8351312a7f24d46f67c2f91f46b7377bc2c672"
+      ref: "0.0.5"
+      resolved-ref: c7c6eff053ae4c2d0022adcb94a8f00f0bd21f1f
       url: "https://github.com/nyaneet/three_dart.git"
     source: git
-    version: "0.0.3"
+    version: "0.0.5"
   three_dart_jsm:
     dependency: "direct main"
     description:
       path: "."
-      ref: "0.0.3"
-      resolved-ref: "0a3e29f0aa6bfc7ac145b86cc8b54bb615114c56"
+      ref: "0.0.5"
+      resolved-ref: "6693c1bb9c7a7cf3f68eb70bd28fec75fe1b3ef8"
       url: "https://github.com/nyaneet/three_dart_jsm.git"
     source: git
-    version: "0.0.3"
+    version: "0.0.4"
   typed_data:
     dependency: transitive
     description:
@@ -413,14 +421,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "14.3.1"
+  web:
+    dependency: transitive
+    description:
+      name: web
+      sha256: "868d88a33d8a87b18ffc05f9f030ba328ffefba92d6c127917a2ba740f9cfe4a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.1"
   xml:
     dependency: transitive
     description:
       name: xml
-      sha256: b015a8ad1c488f66851d762d3090a21c600e479dc75e68328c52774040cf9226
+      sha256: "67f0aff7be013d107995e9b75bf4e7f2c3ef2dfdb2c8e68024bba0a7fd5756a4"
       url: "https://pub.dev"
     source: hosted
-    version: "6.5.0"
+    version: "7.0.1"
 sdks:
-  dart: ">=3.8.0-0 <4.0.0"
+  dart: ">=3.11.0 <4.0.0"
   flutter: ">=3.18.0-18.0.pre.54"
